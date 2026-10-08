@@ -576,3 +576,70 @@ startBtn.addEventListener("click", () => {
 restartBtn.addEventListener("click", iniciarQuiz);
 nextBtn.addEventListener("click", proximaPergunta);
 recordScore.textContent = Number(localStorage.getItem(RECORD_KEY) || 0);
+
+
+async function carregarRanking() {
+  const lista = document.getElementById("ranking-list");
+
+  lista.replaceChildren();
+
+  const carregando = document.createElement("tr");
+  const mensagem = document.createElement("td");
+
+  mensagem.colSpan = 3;
+  mensagem.textContent = "Carregando ranking...";
+  mensagem.className = "text-center";
+
+  carregando.appendChild(mensagem);
+  lista.appendChild(carregando);
+
+  try {
+    const { data, error } = await db
+      .from("ranking")
+      .select("nome, pontuacao")
+      .order("pontuacao", { ascending: false })
+      .limit(10);
+
+    if (error) throw error;
+
+    lista.replaceChildren();
+
+    if (!data || data.length === 0) {
+      const linha = lista.insertRow();
+      const celula = linha.insertCell();
+
+      celula.colSpan = 3;
+      celula.textContent = "Ainda não há pontuações.";
+      celula.className = "text-center";
+
+      return;
+    }
+
+    data.forEach((jogador, index) => {
+      const linha = lista.insertRow();
+
+      linha.insertCell().textContent = index + 1;
+      linha.insertCell().textContent = jogador.nome;
+      linha.insertCell().textContent = jogador.pontuacao;
+
+      linha.cells[2].className = "text-end fw-bold";
+    });
+  } catch (error) {
+    console.error("Erro ao carregar ranking:", error);
+
+    lista.replaceChildren();
+
+    const linha = lista.insertRow();
+    const celula = linha.insertCell();
+
+    celula.colSpan = 3;
+    celula.textContent = "Não foi possível carregar o ranking.";
+    celula.className = "text-center";
+  }
+}
+
+document
+  .getElementById("refresh-ranking")
+  .addEventListener("click", carregarRanking);
+
+carregarRanking();
