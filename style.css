@@ -402,6 +402,7 @@ body {
 .ranking-panel > p {
   color: var(--muted);
   font-size: 0.9rem;
+  color: white;
 }
 
 /* Tabela */
