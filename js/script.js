@@ -342,6 +342,7 @@ const recordScore = document.querySelector("#record-score");
 const timerElement = document.querySelector("#timer");
 const timerBar = document.querySelector("#timer-bar");
 const timerPill = document.querySelector(".timer-pill");
+const rankingPanel = document.querySelector("#ranking-panel");
 
 const TOTAL_PERGUNTAS = 10;
 const TEMPO_POR_PERGUNTA = 15;
@@ -405,9 +406,14 @@ function iniciarQuiz() {
 
 function mostrarTela(tela) {
   if (tela !== "quiz") pararTimer();
+
   startScreen.classList.toggle("d-none", tela !== "inicio");
   quizScreen.classList.toggle("d-none", tela !== "quiz");
   resultScreen.classList.toggle("d-none", tela !== "resultado");
+
+  document
+    .querySelector("#ranking-panel")
+    .classList.toggle("d-none", tela === "quiz");
 }
 
 function mostrarPergunta() {
@@ -548,12 +554,14 @@ async function mostrarResultado() {
 
   mostrarTela("resultado");
 
-  const salvo = await salvarPontuacao();
+    const salvo = await salvarPontuacao();
 
   if (!salvo) {
     resultMessage.textContent +=
       " Não foi possível salvar sua pontuação no ranking.";
   }
+
+  await carregarRanking();
 }
 
 
