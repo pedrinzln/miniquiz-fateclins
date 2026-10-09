@@ -378,32 +378,121 @@ body {
 }
 
 
+/* ===== RANKING ===== */
 .ranking-panel {
   margin-top: 1.5rem;
-  padding: 1.5rem;
-  border-radius: 1rem;
+  padding: 1.75rem;
+  background: linear-gradient(
+    145deg,
+    rgba(24, 18, 43, 0.96),
+    rgba(13, 12, 27, 0.96)
+  );
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
 }
 
 .ranking-panel h2 {
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
 }
 
-.ranking-panel > p:not(.eyebrow) {
-  color: var(--bs-secondary-color);
+.ranking-panel > p {
+  color: var(--muted);
+  font-size: 0.9rem;
 }
 
-.ranking-panel .table {
-  margin-bottom: 1rem;
-  border-radius: 0.75rem;
+/* Tabela */
+.ranking-panel .table-responsive {
+  margin-top: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px;
   overflow: hidden;
 }
 
-.ranking-panel th {
-  color: #b8b5ff;
-  font-size: 0.85rem;
+.ranking-panel .table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text);
+  --bs-table-border-color: rgba(255, 255, 255, 0.07);
+  margin-bottom: 0;
 }
 
-.ranking-panel td {
+.ranking-panel .table thead th {
+  padding: 0.9rem 1rem;
+  background: rgba(139, 92, 246, 0.09);
+  color: #b9a7ff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.15);
+}
+
+.ranking-panel .table tbody td {
+  padding: 0.9rem 1rem;
+  font-size: 0.9rem;
   vertical-align: middle;
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.ranking-panel .table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.ranking-panel .table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.ranking-panel .table tbody tr:hover {
+  background: rgba(139, 92, 246, 0.08);
+}
+
+/* Posições e pontuação */
+.ranking-panel .table tbody td:first-child {
+  width: 65px;
+  color: #a99aff;
+  font-weight: 800;
+}
+
+.ranking-panel .table tbody td:last-child {
+  color: #67e8f9;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Botão */
+#refresh-ranking {
+  margin-top: 1rem;
+  padding: 0.7rem 1.1rem;
+  border-color: rgba(167, 139, 250, 0.35);
+  border-radius: 10px;
+  color: #d7ccff;
+  font-weight: 700;
+  transition: all 0.2s ease;
+}
+
+#refresh-ranking:hover {
+  color: #fff;
+  background: rgba(139, 92, 246, 0.18);
+  border-color: #a78bfa;
+  transform: translateY(-1px);
+}
+
+/* Celular */
+@media (max-width: 576px) {
+  .ranking-panel {
+    padding: 1.1rem;
+    border-radius: 16px;
+  }
+
+  .ranking-panel h2 {
+    font-size: 1.3rem;
+  }
+
+  .ranking-panel .table thead th,
+  .ranking-panel .table tbody td {
+    padding: 0.75rem 0.6rem;
+  }
 }
