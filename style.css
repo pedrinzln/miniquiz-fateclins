@@ -376,3 +376,34 @@ body {
   position: relative;
   z-index: 1;
 }
+
+
+.ranking-panel {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.ranking-panel h2 {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.ranking-panel > p:not(.eyebrow) {
+  color: var(--bs-secondary-color);
+}
+
+.ranking-panel .table {
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+.ranking-panel th {
+  color: #b8b5ff;
+  font-size: 0.85rem;
+}
+
+.ranking-panel td {
+  vertical-align: middle;
+}
